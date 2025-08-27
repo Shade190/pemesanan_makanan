@@ -1,0 +1,167 @@
+body {
+  font-family: "Montserrat", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  min-height: 100vh;
+}
+header {
+  background: linear-gradient(90deg, #4caf50 60%, #388e3c 100%);
+  color: white;
+  padding: 32px 0 18px 0;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+nav {
+  background: #333;
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 6px 18px;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+nav a.active,
+nav a:hover {
+  background: #4caf50;
+  color: #fff;
+}
+main {
+  max-width: 900px;
+  margin: 40px auto 60px auto;
+  background: white;
+  padding: 36px 28px 32px 28px;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+.section-content {
+  margin-bottom: 48px;
+}
+.main-image {
+  display: block;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
+  margin: 24px auto 18px auto;
+  transition: transform 0.3s;
+}
+.main-image:hover {
+  transform: scale(1.04) rotate(-2deg);
+}
+.fitur-list {
+  margin: 18px 0 0 0;
+  padding-left: 18px;
+  color: #388e3c;
+  font-weight: 500;
+}
+.about-grid {
+  display: flex;
+  gap: 32px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.about-grid > div {
+  flex: 1 1 200px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  padding: 18px 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+.kontak-list {
+  margin: 12px 0 18px 0;
+  padding-left: 18px;
+}
+.kontak-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 350px;
+  background: #f9f9f9;
+  padding: 18px 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+.kontak-form input,
+.kontak-form textarea {
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+.kontak-form button {
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.kontak-form button:hover {
+  background: #388e3c;
+}
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 18px 0 12px 0;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  margin-top: 40px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+.cta-btn {
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, #4caf50 60%, #388e3c 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s, transform 0.2s;
+}
+.cta-btn:hover {
+  background: #388e3c;
+  transform: scale(1.04);
+}
+@media (max-width: 700px) {
+  main {
+    padding: 16px 4vw 24px 4vw;
+  }
+  .about-grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .main-image {
+    max-width: 100%;
+  }
+}

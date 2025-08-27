@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodOrder - Pesan Makanan Online</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .food-list { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; margin: 32px 0; }
+    .food-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); width: 260px; padding: 18px 16px; text-align: center; transition: transform 0.2s; }
+    .food-card:hover { transform: scale(1.04); box-shadow: 0 4px 18px rgba(76,175,80,0.13); }
+    .food-card img { width: 100%; max-width: 180px; border-radius: 10px; margin-bottom: 12px; }
+    .food-card h3 { margin: 10px 0 6px 0; font-size: 1.2rem; }
+    .food-card p { color: #555; font-size: 0.98rem; }
+    .food-card .price { color: #4CAF50; font-weight: bold; font-size: 1.1rem; margin: 8px 0; }
+    .food-card button { background: #4CAF50; color: #fff; border: none; border-radius: 6px; padding: 10px 22px; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+    .food-card button:hover { background: #388e3c; }
+    .cart { background: #f9f9f9; border-radius: 10px; padding: 18px 16px; max-width: 400px; margin: 32px auto; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
+    .cart h2 { margin-top: 0; }
+    .cart-list { list-style: none; padding: 0; margin: 0 0 12px 0; }
+    .cart-list li { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .cart-total { font-weight: bold; color: #4CAF50; }
+    .order-btn { width: 100%; background: linear-gradient(90deg, #4CAF50 60%, #388e3c 100%); color: #fff; border: none; border-radius: 8px; padding: 12px 0; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
+    .order-btn:hover { background: #388e3c; }
+    @media (max-width: 700px) { .food-list { flex-direction: column; align-items: center; } .food-card { width: 90vw; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FoodOrder</h1>
+    <p>Pesan makanan favoritmu secara online, cepat & mudah!</p>
+    <nav style="margin-top:18px;">
+      <a href="wesite.html" class="nav-link">Home</a>
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#cart" class="nav-link">Keranjang</a>
+    </nav>
+  </header>
+  <main>
+    <section id="menu">
+      <h2 style="text-align:center;margin-top:32px;">Menu Pilihan</h2>
+      <div class="food-list" id="foodList">
+        <!-- Makanan akan di-generate oleh JS -->
+      </div>
+    </section>
+    <section id="cart">
+      <div class="cart">
+        <h2>Keranjang Pesanan</h2>
+        <ul class="cart-list" id="cartList"></ul>
+        <div class="cart-total">Total: <span id="cartTotal">Rp0</span></div>
+        <button class="order-btn" id="orderBtn">Pesan Sekarang</button>
+        <div id="orderMsg" style="margin-top:10px;"></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 FoodOrder. All rights reserved.
+  </footer>
+  <script>
+    const foods = [
+      { name: 'Nasi Goreng', price: 18000, img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80', desc: 'Nasi goreng spesial dengan telur dan ayam.' },
+      { name: 'Mie Ayam', price: 15000, img: 'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80', desc: 'Mie ayam lezat dengan topping melimpah.' },
+      { name: 'Ayam Geprek', price: 20000, img: 'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80', desc: 'Ayam geprek pedas, kriuk, dan gurih.' },
+      { name: 'Sate Ayam', price: 22000, img: 'https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80', desc: 'Sate ayam bumbu kacang, 10 tusuk.' },
+      { name: 'Bakso', price: 16000, img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80', desc: 'Bakso sapi kenyal dengan kuah gurih.' },
+      { name: 'Es Teh Manis', price: 6000, img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80', desc: 'Minuman segar pelepas dahaga.' }
+    ];
+    const foodList = document.getElementById('foodList');
+    const cartList = document.getElementById('cartList');
+    const cartTotal = document.getElementById('cartTotal');
+    const orderBtn = document.getElementById('orderBtn');
+    const orderMsg = document.getElementById('orderMsg');
+    let cart = [];
+    function renderFoods() {
+      foodList.innerHTML = '';
+      foods.forEach((food, idx) => {
+        const card = document.createElement('div');
+        card.className = 'food-card';
+        card.innerHTML = `
+          <img src="${food.img}" alt="${food.name}">
+          <h3>${food.name}</h3>
+          <div class="price">Rp${food.price.toLocaleString()}</div>
+          <p>${food.desc}</p>
+          <button onclick="addToCart(${idx})">Tambah</button>
+        `;
+        foodList.appendChild(card);
+      });
+    }
+    window.addToCart = function(idx) {
+      const food = foods[idx];
+      const found = cart.find(item => item.name === food.name);
+      if(found) { found.qty++; } else { cart.push({ ...food, qty: 1 }); }
+      renderCart();
+    }
+    function renderCart() {
+      cartList.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, i) => {
+        total += item.price * item.qty;
+        const li = document.createElement('li');
+        li.innerHTML = `${item.name} x${item.qty} <span>Rp${(item.price*item.qty).toLocaleString()}</span> <button onclick="removeFromCart(${i})" style="background:#e53935;color:#fff;border:none;border-radius:4px;padding:2px 8px;margin-left:8px;cursor:pointer;">Hapus</button>`;
+        cartList.appendChild(li);
+      });
+      cartTotal.textContent = 'Rp' + total.toLocaleString();
+    }
+    window.removeFromCart = function(idx) {
+      cart.splice(idx,1);
+      renderCart();
+    }
+    orderBtn.onclick = function() {
+      if(cart.length === 0) {
+        orderMsg.textContent = 'Keranjang masih kosong!';
+        orderMsg.style.color = '#e53935';
+        return;
+      }
+      orderMsg.textContent = 'Pesanan Anda berhasil dikirim! Terima kasih.';
+      orderMsg.style.color = '#4CAF50';
+      cart = [];
+      renderCart();
+    }
+    renderFoods();
+    renderCart();
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website pemesanan makananl</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1 class="fade-in">Selamat Datang di Website pesan makanan </h1>
+      <p class="fade-in" style="animation-delay: 0.2s">
+        Tempat terbaik untuk memesan makanan saat sedang lapar atau perjalanan jauh!
+      </p>
+    </header>
+    <nav aria-label="Navigasi utama">
+      <a href="#beranda" class="nav-link">Beranda</a>
+      <a href="#tentang" class="nav-link">Tentang</a>
+      <a href="#kontak" class="nav-link">Kontak</a>
+    </nav>
+    <main>
+      <section id="beranda" class="section-content">
+        <h2>Beranda</h2>
+        <p>
+          Selamat datang di Website pesan makanan online kami
+          kalian dapat memencet tombol pemesanan di bawah gambar
+        </p>
+        <ul class="fitur-list">
+          <li>minuman</li>
+          <li>makanan ringan</li>
+          <li>makanan berat</li>
+        </ul>
+        <img
+          src="3454969829_86710642002144_1752770676993.png"
+          alt="Ilustrasi belajar website"
+          class="main-image"
+        />
+    <button id="ctaButton" class="cta-btn">Gabung Sekarang</button>
+    <button id="foodOrderBtn" class="cta-btn" style="margin-left:12px;background:#ff9800;">Masuk ke FoodOrder</button>
+      </section>
+      <section id="tentang" class="section-content">
+        <h2>Tentang Kami</h2>
+        <p>
+          Website pemesanan makanan lewat jauh dan siap di antarkan kerumah 
+          dijamin masih hangat dan enak lalu di bungkus dengan rapih
+        </p>
+        <div class="about-grid">
+          <div>
+            <h3>Misi Kami</h3>
+            <p>
+              Membantu masyarakat untuk memesan makanan saat lapar dan
+              tempat makan sangat jauh
+            </p>
+          </div>
+          <div>
+            <h3>Visi Kami</h3>
+            <p>Menjadi platform yang bisa serba guna dalam memesan makanan.</p>
+          </div>
+        </div>
+      </section>
+      <section id="kontak" class="section-content">
+        <h2>Kontak</h2>
+        <p>Hubungi kami untuk pertanyaan, saran, atau kerjasama:</p>
+        <ul class="kontak-list">
+          <li>Email: <a href="mailto:info@kerker.com">info@kerker.com</a></li>
+          <li>Instagram: <a href="#">@kerker</a></li>
+          <li>Facebook: <a href="#">Edukasi makananl</a></li>
+          <li>Twitter: <a href="#">@edukasikerker</a></li>
+        </ul>
+        <form id="formKontak" class="kontak-form">
+          <label for="nama">Nama:</label>
+          <input type="text" id="nama" name="nama" required />
+          <label for="pesan">Pesan:</label>
+          <textarea id="pesan" name="pesan" rows="3" required></textarea>
+          <button type="submit">Kirim</button>
+        </form>
+        <div id="formMsg" style="margin-top: 10px"></div>
+      </section>
+    </main>
+    <footer>&copy; 2025 Website Edukasi Digital. All rights reserved.</footer>
+    <script src="script.js"></script>
+    <script>
+      document.getElementById("ctaButton").onclick = function () {
+        alert("Terima kasih sudah bergabung!");
+      };
+        document.getElementById('foodOrderBtn').onclick = function() {
+          window.location.href = 'law.html';
+        };
+    </script>
+  </body>
+</html>
